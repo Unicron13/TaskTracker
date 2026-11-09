@@ -1,6 +1,6 @@
 using TaskTracker.Core.Models;
 
-namespace TaskTracker.Core.Tests.Model;
+namespace TaskTracker.Core.Tests.Models;
 
 public class TaskItemTests
 {
@@ -29,5 +29,33 @@ public class TaskItemTests
 
         // Then
         Assert.True(taskItem.IsCompleted);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Constructor_InvalidTitle_ThrowsArgumentException(string title)
+    {
+        // Given + When + Then
+        var ex = Assert.Throws<ArgumentException>(() => new TaskItem(1, title, Priority.Medium));
+        Assert.Equal("title", ex.ParamName);
+    }
+
+    [Fact]
+    public void Constructor_NullTitle_ThrowsArgumentNullException()
+    {
+        // Given + When + Then
+        var ex = Assert.Throws<ArgumentNullException>(() => new TaskItem(1, null!, Priority.Medium));
+        Assert.Equal("title", ex.ParamName);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void Constructor_InvalidId_ThrowsArgumentOutOfRangeException(int id)
+    {
+        // Given + When + Then
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new TaskItem(id, "task", Priority.Medium));
+        Assert.Equal("id", ex.ParamName);
     }
 }
