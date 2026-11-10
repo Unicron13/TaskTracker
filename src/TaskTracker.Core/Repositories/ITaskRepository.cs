@@ -8,12 +8,13 @@ namespace TaskTracker.Core.Repositories;
 public interface ITaskRepository
 {
     /// <summary>
-    /// Creates and saves a task item.
+    /// Creates and saves a task item. The task item ID is assigned by the repository.
     /// </summary>
     /// <param name="title">Title of the task.</param>
     /// <param name="priority">Priority of the task.</param>
     /// <param name="dueDate">Due date of the task.</param>
     /// <returns>Task item object.</returns>
+    /// <exception cref="ArgumentException">Thrown whe <paramref name="title"/> is null, empty, or consists only of white-space characters.</exception>
     TaskItem Add(string title, Priority priority, DateOnly? dueDate = null);
 
     /// <summary>
@@ -33,6 +34,6 @@ public interface ITaskRepository
     /// Removes the task item.
     /// </summary>
     /// <param name="id">ID of the task.</param>
-    /// <returns>True if the task item is successfully deleted; otherwise, it returns false.</returns>
+    /// <returns><see langword="true"/> if the task item is successfully deleted; otherwise, it returns <see langword="false"/> if the task item does not exist.</returns>
     bool Remove(int id);
 }

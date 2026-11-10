@@ -1,7 +1,7 @@
 namespace TaskTracker.Core.Models;
 
 /// <summary>
-/// Define the priority of the task.
+/// Defines the priority of the task.
 /// </summary>
 public enum Priority
 {
