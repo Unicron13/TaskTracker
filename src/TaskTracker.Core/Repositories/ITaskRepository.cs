@@ -14,7 +14,7 @@ public interface ITaskRepository
     /// <param name="priority">Priority of the task.</param>
     /// <param name="dueDate">Due date of the task.</param>
     /// <returns>Task item object.</returns>
-    /// <exception cref="ArgumentException">Thrown whe <paramref name="title"/> is null, empty, or consists only of white-space characters.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="title"/> is null, empty, or consists only of white-space characters.</exception>
     TaskItem Add(string title, Priority priority, DateOnly? dueDate = null);
 
     /// <summary>
