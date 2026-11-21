@@ -33,7 +33,7 @@ public class TaskItem
     /// <param name="priority">Priority of the task item.</param>
     /// <param name="dueDate">Due date of the task item. Can be null.</param>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="id"/> is negative or zero.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="title"/> null, empty, or contains white spaces.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="title"/> is null, empty, or consists only of white-space characters.</exception>
     public TaskItem(int id, string title, Priority priority, DateOnly? dueDate = null)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(id);
