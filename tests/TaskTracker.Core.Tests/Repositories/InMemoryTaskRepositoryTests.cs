@@ -119,4 +119,25 @@ public class InMemoryTaskRepositoryTests
         // When + Then
         Assert.False(_repository.Remove(2));
     }
+
+    [Fact]
+    public void GetAll_AfterRemovingTask_ReturnsTasksInAscendingIdOrder()
+    {
+        // Given
+        var task1 = _repository.Add("task 1", Priority.Medium);
+        var task2 = _repository.Add("task 2", Priority.Medium);
+        var task3 = _repository.Add("task 3", Priority.Medium);
+        var task4 = _repository.Add("task 4", Priority.Medium);
+
+        _repository.Remove(2);
+
+        var task5 = _repository.Add("task 4", Priority.Medium);
+
+        // When
+        var ids = _repository.GetAll().Select(task => task.Id);
+        int[] expected = [1, 3, 4, 5];
+
+        // Then
+        Assert.Equal(expected, ids);
+    }
 }
