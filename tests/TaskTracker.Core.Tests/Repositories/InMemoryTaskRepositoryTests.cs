@@ -124,14 +124,14 @@ public class InMemoryTaskRepositoryTests
     public void GetAll_AfterRemovingTask_ReturnsTasksInAscendingIdOrder()
     {
         // Given
-        var task1 = _repository.Add("task 1", Priority.Medium);
+        _repository.Add("task 1", Priority.Medium);
         var task2 = _repository.Add("task 2", Priority.Medium);
-        var task3 = _repository.Add("task 3", Priority.Medium);
-        var task4 = _repository.Add("task 4", Priority.Medium);
+        _repository.Add("task 3", Priority.Medium);
+        _repository.Add("task 4", Priority.Medium);
 
-        _repository.Remove(2);
+        _repository.Remove(task2.Id);
 
-        var task5 = _repository.Add("task 4", Priority.Medium);
+        _repository.Add("task 5", Priority.Medium);
 
         // When
         var ids = _repository.GetAll().Select(task => task.Id);
