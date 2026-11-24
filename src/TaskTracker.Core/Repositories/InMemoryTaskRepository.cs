@@ -10,7 +10,7 @@ public class InMemoryTaskRepository : ITaskRepository
     /// <summary>
     /// List of task items.
     /// </summary>
-    private readonly Dictionary<int, TaskItem> _tasksById = [];
+    private readonly OrderedDictionary<int, TaskItem> _tasksById = [];
 
     /// <summary>
     /// The ID that will be assigned to the next added task item.
@@ -22,7 +22,7 @@ public class InMemoryTaskRepository : ITaskRepository
     {
         var task = new TaskItem(_nextId, title, priority, dueDate);
 
-        _tasksById[_nextId] = task;
+        _tasksById.Add(task.Id, task);
         _nextId++;
 
         return task;
@@ -31,7 +31,7 @@ public class InMemoryTaskRepository : ITaskRepository
     /// <inheritdoc/>
     public IReadOnlyList<TaskItem> GetAll()
     {
-        return [.. _tasksById.Values.OrderBy(task => task.Id)];
+        return [.. _tasksById.Values];
     }
 
     /// <inheritdoc/>
