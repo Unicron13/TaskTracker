@@ -31,8 +31,8 @@ public class TaskService
     public IReadOnlyList<TaskItem> GetPending()
     {
         return [.. _repository
-        .GetAll()
-        .Where(task => !task.IsCompleted)];
+            .GetAll()
+            .Where(task => !task.IsCompleted)];
     }
 
     /// <summary>
@@ -43,8 +43,8 @@ public class TaskService
     public IReadOnlyList<TaskItem> GetOverdue(DateOnly today)
     {
         return [.. GetPending()
-        .Where(task => task.DueDate is not null && task.DueDate < today)
-        .OrderBy(task => task.DueDate)
-        .ThenByDescending(task => task.Priority)];
+            .Where(task => task.DueDate is not null && task.DueDate < today)
+            .OrderBy(task => task.DueDate)
+            .ThenByDescending(task => task.Priority)];
     }
 }
