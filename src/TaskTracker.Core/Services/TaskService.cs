@@ -40,6 +40,6 @@ public class TaskService
     /// <returns>Read only list with pending task items with a due date before today’s date.</returns>
     public IReadOnlyList<TaskItem> GetOverdue(DateOnly today)
     {
-        return [.. _repository.GetAll().Where(task => task.DueDate is not null && task.DueDate < today).OrderBy(task => task.DueDate).ThenByDescending(task => task.Priority)];
+        return [.. GetPending().Where(task => task.DueDate is not null && task.DueDate < today).OrderBy(task => task.DueDate).ThenByDescending(task => task.Priority)];
     }
 }
